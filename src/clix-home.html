@@ -1,0 +1,55 @@
+<!-- Copyright (c) 2016 - ST6 -->
+
+<link rel="import" href="elements.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="clix-home">
+
+  <template>
+
+    <style include="shared-styles">
+
+      :host {
+        display: block;
+        padding: 10px;
+      }
+
+    </style>
+
+    <paper-material class="card" elevation="1">
+
+      <paper-item>
+        <h3>Hello Forbes ... </h3>
+      </paper-item>
+
+    </paper-material>
+
+    <paper-material class="card" elevation="1">
+
+      <paper-item>
+        <h3>Long time no see. </h3>
+      </paper-item>
+
+    </paper-material>
+
+    <paper-material class="card" elevation="1">
+
+      <paper-item>
+        <h3>The future is here</h3>
+      </paper-item>
+
+    </paper-material>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'clix-home',
+
+      behaviors: [
+        Polymer.NeonAnimatableBehavior
+      ]
+
+    });
+  </script>
+
+</dom-module>
