@@ -1,0 +1,162 @@
+<!-- Copyright (c) 2016 - ST6 -->
+
+<link rel="import" href="elements.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="clix-app">
+  <template>
+    <style include="shared-styles">
+
+      :host {
+
+        --app-primary-color: rgba(203,219,216,1);
+        --app-secondary-color: white;
+
+        display: block;
+
+      }
+
+      paper-tab[link] a {
+        /* These mixins (from iron-flex-layout) center the link text. */
+        @apply(--layout-horizontal);
+        @apply(--layout-center-center);
+        font-family: 'Toronto-Bold';
+        font-size: 1em;
+        color: #fff;
+        text-decoration: none;
+        opacity: 1;
+      }
+
+      paper-tabs {
+
+        --paper-tabs-selection-bar-color: {
+          white;
+        };
+
+      }
+
+      app-header-layout {
+
+        /*background-color: rgba(217, 217, 197, 0.2);*/
+
+      }
+
+      app-header {
+
+        --app-header-background-front-layer:{
+
+          background-image: url("../images/spectrum.gif");
+          background-size: 100% 100%;
+          -webkit-filter: hue-rotate(120deg) opacity(0.25) blur(8px) contrast(5.0) sepia(0.5);
+
+        };
+
+        --app-header-background-rear-layer:{
+
+          background-image: url("../images/spectrum.gif");
+          background-size: 100% 100%;
+          -webkit-filter: hue-rotate(120deg) invert(1) opacity(0.2) blur(5px) saturate(10) contrast(5.0);
+
+        };
+
+      }
+
+      [main-title] {
+        color: white;
+        font-size: 10vmin;
+      }
+
+      [condensed-title] {
+        color: black;
+      }
+
+    </style>
+
+    <app-location route="{{route}}"></app-location>
+
+    <app-route
+        route="{{route}}"
+        pattern="/:page"
+        data="{{routeData}}"
+        tail="{{subroute}}"></app-route>
+
+    <app-drawer-layout fullbleed>
+
+      <!-- Main content -->
+      <app-header-layout>
+
+        <app-header condenses fixed shadow effects="waterfall blend-background parallax-background">
+
+          <app-toolbar></app-toolbar>
+
+          <app-toolbar>
+            <div class="title" main-title>C l i x</div>
+          </app-toolbar>
+
+          <app-toolbar></app-toolbar>
+
+          <paper-tabs selected="0" sticky>
+            <paper-tab link><a name="home" href="/home">Home</a></paper-tab>
+            <paper-tab link><a name="path" href="/path">Path</a></paper-tab>
+            <paper-tab link><a name="play" href="/play">Play</a></paper-tab>
+          </paper-tabs>
+
+        </app-header>
+
+        <neon-animated-pages id="pages"
+            role='main'
+            selected="[[page]]"
+            attr-for-selected='name'
+            entry-animation='fade-in-animation'
+            exit-animation='fade-out-animation'>
+
+            <clix-home name="home"></clix-home>
+            <clix-path name="path"></clix-path>
+            <clix-play name="play"></clix-play>
+
+        </neon-animated-pages>
+      </app-header-layout>
+    </app-drawer-layout>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'clix-app',
+
+      properties: {
+
+        page: {
+          type: String,
+          reflectToAttribute: true,
+          observer: '_pageChanged'
+        }
+
+      },
+
+      observers: [
+        '_routePageChanged(routeData.page)'
+      ],
+
+      _routePageChanged: function(page) {
+        console.log( 'page->' + page );
+        this.page = page || 'home';
+
+      },
+
+      _pageChanged: function(page) {
+
+        // Load page import on demand. Show 404 page if fails
+        var resolvedPageUrl = this.resolveUrl('clix-' + page + '.html');
+        this.importHref(resolvedPageUrl, null, this._showPage404, true);
+
+      },
+
+      _showPage404: function() {
+
+        this.page = 'home';
+
+      }
+
+    });
+  </script>
+</dom-module>

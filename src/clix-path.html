@@ -1,0 +1,60 @@
+<!-- Copyright (c) 2016 - Charlie Voix -->
+
+<link rel="import" href="elements.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="clix-path">
+
+  <template>
+
+    <style include="shared-styles">
+
+      :host {
+        display: block;
+        padding: 10px;
+      }
+
+    </style>
+
+    <paper-material class="card" elevation="1">
+
+      <paper-item>
+        <h3>Paths Here</h3>
+      </paper-item>
+
+    </paper-material>
+
+    <paper-material class="card" elevation="1">
+
+      <google-map
+          latitude="40.4144"
+          longitude="-73.5942"
+          api-key="AIzaSyB42YBd1UzIzQEnKUpmUpEpYWgQg7D0Z70"
+          fit-to-markers>
+
+        <google-map-marker latitude="40.4144"
+                           longitude="-73.5942"
+                           title="brooklyn heights"></google-map-marker>
+
+        <google-map-marker latitude="42.3583"
+                           longitude="-71.0661"
+                           title="beacon hill"></google-map-marker>
+
+      </google-map>
+
+    </paper-material>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'clix-path',
+
+      behaviors: [
+        Polymer.NeonAnimatableBehavior
+      ]
+
+    });
+  </script>
+
+</dom-module>

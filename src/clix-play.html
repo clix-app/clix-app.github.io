@@ -1,0 +1,40 @@
+<!-- Copyright (c) 2016 - ST6 -->
+
+<link rel="import" href="elements.html">
+<link rel="import" href="shared-styles.html">
+
+<dom-module id="clix-play">
+
+  <template>
+
+    <style include="shared-styles">
+
+      :host {
+        display: block;
+        padding: 10px;
+      }
+
+    </style>
+
+    <paper-material class="card" elevation="1">
+
+      <paper-item>
+        <h3>Play Here</h3>
+      </paper-item>
+
+    </paper-material>
+
+  </template>
+
+  <script>
+    Polymer({
+      is: 'clix-play',
+
+      behaviors: [
+        Polymer.NeonAnimatableBehavior
+      ]
+
+    });
+  </script>
+
+</dom-module>
